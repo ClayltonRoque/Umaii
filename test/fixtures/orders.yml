@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  type_order: MyString
+  derpature_address: MyText
+  destination_address: MyText
+  order_status: MyString
+  request_time: 2025-08-07 19:20:26
+  accept_time: 2025-08-07 19:20:26
+  finished_time: 2025-08-07 19:20:26
+  order_value: 9.99
+
+two:
+  user_id: two
+  type_order: MyString
+  derpature_address: MyText
+  destination_address: MyText
+  order_status: MyString
+  request_time: 2025-08-07 19:20:26
+  accept_time: 2025-08-07 19:20:26
+  finished_time: 2025-08-07 19:20:26
+  order_value: 9.99

@@ -1,0 +1,57 @@
+require "application_system_test_case"
+
+class OrdersTest < ApplicationSystemTestCase
+  setup do
+    @order = orders(:one)
+  end
+
+  test "visiting the index" do
+    visit orders_url
+    assert_selector "h1", text: "Orders"
+  end
+
+  test "should create order" do
+    visit orders_url
+    click_on "New order"
+
+    fill_in "Accept time", with: @order.accept_time
+    fill_in "Derpature address", with: @order.derpature_address
+    fill_in "Destination address", with: @order.destination_address
+    fill_in "Finished time", with: @order.finished_time
+    fill_in "Order status", with: @order.order_status
+    fill_in "Order value", with: @order.order_value
+    fill_in "Request time", with: @order.request_time
+    fill_in "Type order", with: @order.type_order
+    fill_in "User id", with: @order.user_id_id
+    click_on "Create Order"
+
+    assert_text "Order was successfully created"
+    click_on "Back"
+  end
+
+  test "should update Order" do
+    visit order_url(@order)
+    click_on "Edit this order", match: :first
+
+    fill_in "Accept time", with: @order.accept_time
+    fill_in "Derpature address", with: @order.derpature_address
+    fill_in "Destination address", with: @order.destination_address
+    fill_in "Finished time", with: @order.finished_time
+    fill_in "Order status", with: @order.order_status
+    fill_in "Order value", with: @order.order_value
+    fill_in "Request time", with: @order.request_time
+    fill_in "Type order", with: @order.type_order
+    fill_in "User id", with: @order.user_id_id
+    click_on "Update Order"
+
+    assert_text "Order was successfully updated"
+    click_on "Back"
+  end
+
+  test "should destroy Order" do
+    visit order_url(@order)
+    click_on "Destroy this order", match: :first
+
+    assert_text "Order was successfully destroyed"
+  end
+end

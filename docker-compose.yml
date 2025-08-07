@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  pg:
+    image: postgres:16
+    container_name: umaii-postgres
+    environment:
+      POSTGRES_USER: umaii
+      POSTGRES_PASSWORD: umaii
+      POSTGRES_DB: umaii_development
+    ports:
+      - "5433:5432"
+volumes:
+  pgdata_umaii:
