@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
+system("docker-compose up -d")
+system("./bin/rails db:migrate")
 exec "./bin/rails", "server", *ARGV

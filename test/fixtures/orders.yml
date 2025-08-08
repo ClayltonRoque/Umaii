@@ -3,7 +3,7 @@
 one:
   user_id: one
   type_order: MyString
-  derpature_address: MyText
+  departure_address: MyText
   destination_address: MyText
   order_status: MyString
   request_time: 2025-08-07 19:20:26
@@ -14,7 +14,7 @@ one:
 two:
   user_id: two
   type_order: MyString
-  derpature_address: MyText
+  departure_address: MyText
   destination_address: MyText
   order_status: MyString
   request_time: 2025-08-07 19:20:26

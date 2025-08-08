@@ -15,14 +15,14 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "New order"
 
     fill_in "Accept time", with: @order.accept_time
-    fill_in "Derpature address", with: @order.derpature_address
+    fill_in "Derpature address", with: @order.departure_address
     fill_in "Destination address", with: @order.destination_address
     fill_in "Finished time", with: @order.finished_time
     fill_in "Order status", with: @order.order_status
     fill_in "Order value", with: @order.order_value
     fill_in "Request time", with: @order.request_time
     fill_in "Type order", with: @order.type_order
-    fill_in "User id", with: @order.user_id_id
+    fill_in "User id", with: @order.user_id
     click_on "Create Order"
 
     assert_text "Order was successfully created"
@@ -34,14 +34,14 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "Edit this order", match: :first
 
     fill_in "Accept time", with: @order.accept_time
-    fill_in "Derpature address", with: @order.derpature_address
+    fill_in "Derpature address", with: @order.departure_address
     fill_in "Destination address", with: @order.destination_address
     fill_in "Finished time", with: @order.finished_time
     fill_in "Order status", with: @order.order_status
     fill_in "Order value", with: @order.order_value
     fill_in "Request time", with: @order.request_time
     fill_in "Type order", with: @order.type_order
-    fill_in "User id", with: @order.user_id_id
+    fill_in "User id", with: @order.user_id
     click_on "Update Order"
 
     assert_text "Order was successfully updated"

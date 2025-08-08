@@ -17,7 +17,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create order" do
     assert_difference("Order.count") do
-      post orders_url, params: { order: { accept_time: @order.accept_time, derpature_address: @order.derpature_address, destination_address: @order.destination_address, finished_time: @order.finished_time, order_status: @order.order_status, order_value: @order.order_value, request_time: @order.request_time, type_order: @order.type_order, user_id_id: @order.user_id_id } }
+      post orders_url, params: { order: { accept_time: @order.accept_time, departure_address: @order.departure_address, destination_address: @order.destination_address, finished_time: @order.finished_time, order_status: @order.order_status, order_value: @order.order_value, request_time: @order.request_time, type_order: @order.type_order, user_id: @order.user_id } }
     end
 
     assert_redirected_to order_url(Order.last)
@@ -34,7 +34,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: { accept_time: @order.accept_time, derpature_address: @order.derpature_address, destination_address: @order.destination_address, finished_time: @order.finished_time, order_status: @order.order_status, order_value: @order.order_value, request_time: @order.request_time, type_order: @order.type_order, user_id_id: @order.user_id_id } }
+    patch order_url(@order), params: { order: { accept_time: @order.accept_time, departure_address: @order.departure_address, destination_address: @order.destination_address, finished_time: @order.finished_time, order_status: @order.order_status, order_value: @order.order_value, request_time: @order.request_time, type_order: @order.type_order, user_id: @order.user_id } }
     assert_redirected_to order_url(@order)
   end
 
