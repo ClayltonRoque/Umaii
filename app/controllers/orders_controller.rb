@@ -3,7 +3,25 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    if params[:user_id]
+      @orders = Order.where(user_id: params[:user_id])
+      # Filtro por descrição
+      if params[:description_items].present?
+        @orders = @orders.where("description_items ILIKE ?", "%#{params[:description_items]}%")
+      end
+      # Ordenação por valor
+      if params[:order_value_sort].present?
+        direction = params[:order_value_sort] == "desc" ? :desc : :asc
+        @orders = @orders.order(order_value: direction)
+      end
+      # Ordenação por data
+      if params[:date_sort].present?
+        direction = params[:date_sort] == "desc" ? :desc : :asc
+        @orders = @orders.order(request_time: direction)
+      end
+    else
+      @orders = Order.all
+    end
   end
 
   # GET /orders/1 or /orders/1.json
@@ -65,6 +83,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:user_id, :type_order, :departure_address, :destination_address, :order_status, :request_time, :accept_time, :finished_time, :order_value)
+      params.require(:order).permit(:user_id, :type_order, :departure_address, :destination_address, :order_status, :request_time, :accept_time, :finished_time, :order_value, :description_items)
     end
 end

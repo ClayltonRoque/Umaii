@@ -3,8 +3,8 @@ class CreateOrders < ActiveRecord::Migration[8.0]
     create_table :orders do |t|
       t.references :user, null: false, foreign_key: true
       t.string :type_order
-      t.text :departure_address
-      t.text :destination_address
+      t.text :departure_address, null: false
+      t.text :destination_address, null: false
       t.string :order_status
       t.datetime :request_time
       t.datetime :accept_time
