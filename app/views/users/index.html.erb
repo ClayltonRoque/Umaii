@@ -14,3 +14,8 @@
 </div>
 
 <%= link_to "New user", new_user_path %>
+<form action="<%= destroy_user_session_path %>" method="post" style="display:inline">
+  <input type="hidden" name="_method" value="delete">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <button type="submit">Sair</button>
+</form>
