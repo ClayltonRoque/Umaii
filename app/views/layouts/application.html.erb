@@ -23,6 +23,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main class="container mx-auto mt-28 px-5 flex">
+      <%= yield %>
+    </main>
   </body>
 </html>
+
+<% if Rails.env.development? %>
+  <script src="http://localhost:35729/livereload.js"></script>
+<% end %>

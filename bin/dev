@@ -1,4 +1,11 @@
-#!/usr/bin/env ruby
-system("docker-compose up -d")
-system("./bin/rails db:migrate")
-exec "./bin/rails", "server", *ARGV
+#!/usr/bin/env bash
+if ! gem list foreman -i --silent > /dev/null; then
+  echo "Installing foreman..."
+  gem install foreman
+fi
+
+docker-compose up -d
+
+./bin/rails db:migrate
+
+exec foreman start -f Procfile.dev "$@"
