@@ -2,9 +2,11 @@
 
 <% content_for :title, "Users" %>
 
-<h1>Users</h1>
 
-<div id="users">
+<div class="card flex justify-center bg-neutral-lighter w-full shadow-md rounded-3xl">
+  <div class="mx-auto">
+      <h1>Users</h1>
+  <div id="users">
   <% @users.each do |user| %>
     <%= render user %>
     <p>
@@ -19,7 +21,8 @@
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <button type="submit">Sair</button>
 </form>
+  </div>
 
-<h1 class="text-3xl text-primary font-bold underline">
-  Hello world!ssssssssssssssssssssssssssssswsssssssssdqqwssssssss
-</h1>
+</div>
+
+
