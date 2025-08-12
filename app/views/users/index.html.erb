@@ -1,23 +1,29 @@
 
-<div class="w-full rounded-xl overflow-hidden mb-4" data-controller="orders-toggle">
-  <div class="w-full bg-neutral-base flex justify-center items-center p-1 mb-4 rounded-2xl">
-    <button class="w-1/2 rounded-2xl py-2 bg-neutral-lighter"
-    data-orders-toggle-target="buttonCreateOrder" data-action="click->orders-toggle#showNewOrder">
-      <%= inline_svg_tag 'svg/check.svg', class: 'w-4 h-4 inline' %>
-      <span>Criar pedido</span>
-    </button>
-    <button class="w-1/2 rounded-2xl py-2" data-orders-toggle-target="buttonListOrders" data-action="click->orders-toggle#showOrders">
-      <%= inline_svg_tag 'svg/package.svg', class: 'w-4 h-4 inline' %>
-      <span>Listar pedidos</span>
-    </button>
-  </div>
-  <div data-orders-toggle-target="newOrder">
-    <%= render 'orders/new' %>
-  </div>
-  <div data-orders-toggle-target="orders" class="hidden">
-    <div id="orders">
-      oi
+<div class="container mx-auto py-8">
+    <% if notice %>
+    <div class="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded shadow text-center w-full max-w-lg">
+      <%= notice %>
     </div>
+  <% end %>
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Lista de Usuários</h1>
+    <%= link_to 'Novo Usuário', new_user_path, class: 'inline-block bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 font-semibold transition' %>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <% @users.each do |user| %>
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start hover:bg-neutral-100 transition">
+        <div class='flex justify-between w-full'>
+          <span class="font-semibold text-lg"><%= user.name.presence || user.email %></span>
+       <%= button_to user_path(user), method: :delete, data: { confirm: 'Tem certeza que deseja excluir este usuário?' }, class: 'bg-transparent border-none p-0 hover:opacity-70' do %>
+        <%= inline_svg_tag 'svg/trash.svg', class: 'w-5 h-5 text-red-600' %>
+        <% end %>
+        </div>
+        <span class="text-gray-500 text-sm"><%= user.email %></span>
+        <div class="flex gap-2 mt-2">
+          <%= link_to 'Ver perfil', user_path(user), class: 'text-blue-600 hover:underline text-sm' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

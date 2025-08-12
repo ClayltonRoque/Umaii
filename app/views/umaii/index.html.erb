@@ -1,0 +1,22 @@
+<div class="w-full rounded-xl overflow-hidden mb-4" data-controller="orders-toggle">
+    <div class="w-full bg-neutral-base flex justify-center items-center p-1 mb-4 rounded-2xl">
+    <button class="w-1/2 rounded-2xl py-2 bg-neutral-lighter"
+    data-orders-toggle-target="buttonCreateOrder" data-action="click->orders-toggle#showNewOrder">
+      <%= inline_svg_tag 'svg/check.svg', class: 'w-4 h-4 inline' %>
+      <span>Criar pedido</span>
+    </button>
+    <button class="w-1/2 rounded-2xl py-2" data-orders-toggle-target="buttonListOrders" data-action="click->orders-toggle#showOrders">
+      <%= inline_svg_tag 'svg/package.svg', class: 'w-4 h-4 inline' %>
+      <span>Listar pedidos</span>
+    </button>
+  </div>
+  <div data-orders-toggle-target="newOrder">
+    <%= render 'order_form', order: Order.new %>
+  </div>
+  <div data-orders-toggle-target="orders" class="hidden">
+    <div id="orders">
+      <%= render 'order_list', orders: @orders %>
+    </div>
+  </div>
+</div>
+

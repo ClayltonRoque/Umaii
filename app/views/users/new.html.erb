@@ -1,11 +1,18 @@
-<% content_for :title, "New user" %>
 
-<h1>New user</h1>
+<% content_for :title, "Novo Usuário" %>
 
-<%= render "form", user: @user %>
+  <% if notice %>
+    <div class="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded shadow text-center w-full max-w-lg">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
+<div class="container mx-auto py-8 max-w-lg">
+  <h1 class="text-2xl font-bold mb-6">Novo Usuário</h1>
+  <div class="bg-white rounded-xl shadow p-6">
+    <%= render "form", user: @user %>
+  </div>
+  <div class="mt-4">
+    <%= link_to "← Voltar para usuários", users_path, class: "text-blue-600 hover:underline text-sm" %>
+  </div>
 </div>

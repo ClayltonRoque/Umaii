@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "umaii#index"
+
+  # Rota para perfil do usuário logado
+  get "perfil", to: "profiles#show", as: :profile
 end

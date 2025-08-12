@@ -1,34 +1,42 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     @users = User.all
   end
 
   def show
-    render @user
+    # renderiza show.html.erb
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def edit
+    # renderiza edit.html.erb
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      render  @user, status: :created
+      redirect_to users_path, notice: "Usuário criado com sucesso."
     else
-      render  @user.errors, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     if @user.update(user_params)
-      render @user
+      redirect_to @user, notice: "Usuário atualizado com sucesso."
     else
-      render @user.errors, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @user.destroy
-    head :no_content
+    redirect_to users_url, notice: "Usuário removido com sucesso."
   end
 
   private
@@ -38,6 +46,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :user_type, :user_photo, :address, :email, :password)
+  params.require(:user).permit(:name, :user_type, :user_photo, :address, :email, :password, :password_confirmation)
   end
 end

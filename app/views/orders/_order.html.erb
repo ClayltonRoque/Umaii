@@ -1,7 +1,8 @@
 <div id="<%= dom_id order %>">
+
   <p>
-    <strong>User:</strong>
-    <%= order.user_id %>
+    <strong>Cliente:</strong>
+    <%= order.user&.name || '-' %>
   </p>
 
   <p>
@@ -10,7 +11,7 @@
   </p>
 
   <p>
-    <strong>Derpature address:</strong>
+    <strong>Departure address:</strong>
     <%= order.departure_address %>
   </p>
 

@@ -1,21 +1,43 @@
-<nav class="w-full bg-lighter-white fixed top-0 left-0 z-50 font-primary">
+<nav class="w-full bg-lighter-white fixed top-0 left-0 z-50 font-primary h-16">
     <div class="container mx-auto flex h-16 justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="p-2 bg-primary-lighter rounded-full">
-                <%= inline_svg_tag 'svg/truck.svg', class: 'w-6 h-6 text-primary-base inline' %>
+        <%= link_to root_path, class: "flex items-center gap-2 group focus:outline-none", style: "text-decoration: none;" do %>
+            <div class="p-2 bg-primary-lighter rounded-full group-hover:bg-primary-base transition">
+                <%= inline_svg_tag 'svg/truck.svg', class: 'w-6 h-6 text-primary-base group-hover:text-white inline transition' %>
             </div>
-            <h1 class="font-bold text-xl">Umaii</h1>
+            <h1 class="font-bold text-xl group-hover:text-primary-base transition">Umaii</h1>
             <p class="neutral-dark opacity-70 text-sm ml-2 mt-0.5">
                 Entregas e corridas simples e rápidas
             </p>
-        </div>
-        <div>
-            <div class="px-2 py-1 flex items-center gap-2 border-primary-base rounded-xl border-1">
-                <%= inline_svg_tag 'svg/radio.svg', class: 'w-4 h-4 text-primary-base inline' %>
-                <span class="text-primary-dark text-sm font-bold">Beta</span>
+        <% end %>
+        <div class="flex items-center gap-4">
+            <div
+                class="px-2 py-1 flex items-center gap-2 border-primary-base rounded-xl border-1"
+            >
+                <% if user_signed_in? %> <%= inline_svg_tag 'svg/radio.svg',
+                class: 'w-4 h-4 text-primary-base inline' %>
+                <span class="text-primary-dark text-sm font-bold"
+                    >Bem vindo <%= current_user.name %></span
+                >
+                <% end %>
             </div>
+            <% if user_signed_in? %>
+            <div class="relative ml-2" data-controller="profile-dropdown">
+                <button
+                    type="button"
+                    class="flex items-center gap-2 focus:outline-none cursor-pointer"
+                    data-action="click->profile-dropdown#toggle"
+                >
+                    <%= image_tag 'jpg/Lulu_umaii.jpg', class: 'w-12 h-12 object-cover rounded-full border-2 border-primary-base', alt: 'Foto de perfil' %>
+                </button>
+                <div
+                    data-profile-dropdown-target="menu"
+                    class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible transition-opacity z-50"
+                >
+                    <%= link_to 'Meu Perfil', user_path(current_user), class: 'block px-4 py-2 text-gray-700 hover:bg-gray-100' %>
+                    <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'w-full text-left px-4 py-2 text-red-600 hover:bg-red-50', form: { class: 'block' } %>
+                </div>
+            </div>
+            <% end %>
         </div>
     </div>
 </nav>
-
-

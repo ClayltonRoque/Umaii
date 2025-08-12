@@ -1,0 +1,20 @@
+<div class="w-full mx-auto bg-white rounded-xl shadow p-6" data-controller="type-order">
+  <div class="flex justify-between items-center mb-2">
+    <div>
+      <h2 class="font-bold text-lg">Novo pedido</h2>
+      <span class="text-neutral-500 text-sm">Crie uma corrida ou entrega</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-neutral-700 text-sm">Papel:</span>
+      <span class="bg-green-500 text-white text-sm px-2 py-1 rounded"><%= current_user.user_type %></span>
+    </div>
+  </div>
+
+<%= render "form", order: @order %>
+</div>
+
+
+
+
+
+

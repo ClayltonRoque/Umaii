@@ -1,22 +1,8 @@
 <div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>User type:</strong>
-    <%= user.user_type %>
-  </p>
-
-  <p>
-    <strong>User photo:</strong>
-    <%= user.user_photo %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= user.address %>
-  </p>
-
+  <p><strong>ID:</strong> <%= user.id %></p>
+  <p><strong>Nome:</strong> <%= user.name %></p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <p><strong>Tipo de usuário:</strong> <%= user.user_type %></p>
+  <p><strong>Criado em:</strong> <%= l(user.created_at, format: :short) if user.created_at %></p>
+  <p><strong>Atualizado em:</strong> <%= l(user.updated_at, format: :short) if user.updated_at %></p>
 </div>

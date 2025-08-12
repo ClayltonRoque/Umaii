@@ -1,9 +1,8 @@
-<%= form_with(model: order, validate: true) do |form| %>
+<%= form_with(model: order, validate: true, local: true) do |form| %>
   <% if order.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-      <ul>
+    <div class="mb-4 p-4 bg-red-100 border border-red-300 rounded">
+      <h2 class="font-semibold text-red-700 mb-2"><%= pluralize(order.errors.count, "erro") %> impediram o salvamento:</h2>
+      <ul class="list-disc list-inside text-red-600">
         <% order.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,57 +10,44 @@
     </div>
   <% end %>
 
-  <div>
-  <%= form.label :user_id, style: "display: block" %>
-  <%= form.text_field :user_id %>
+  <div class="mb-4">
+    <%= form.label :type_order, 'Tipo do pedido', class: "block font-medium mb-1" %>
+    <%= form.select :type_order, [['Corrida', 'ride'], ['Entrega', 'delivery']], {}, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.label :type_order, style: "display: block" %>
-    <%= form.text_field :type_order %>
+  <div class="mb-4">
+    <%= form.label :departure_address, 'Endereço de partida', class: "block font-medium mb-1" %>
+    <%= form.text_field :departure_address, placeholder: "Rua A, 123", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.label :departure_address, style: "display: block" %>
-    <%= form.textarea :departure_address %>
+  <div class="mb-4">
+    <%= form.label :destination_address, 'Endereço de destino', class: "block font-medium mb-1" %>
+    <%= form.text_field :destination_address, placeholder: "Av. B, 456", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.label :destination_address, style: "display: block" %>
-    <%= form.textarea :destination_address %>
+  <div class="mb-4">
+    <%= form.label :order_status, 'Status do pedido', class: "block font-medium mb-1" %>
+    <%= form.text_field :order_status, placeholder: "Pendente", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.label :order_status, style: "display: block" %>
-    <%= form.text_field :order_status %>
+  <div class="mb-4">
+    <%= form.label :order_value, 'Valor do pedido', class: "block font-medium mb-1" %>
+    <%= form.text_field :order_value, placeholder: "50,00", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.label :description_items, style: "display: block" %>
-    <%= form.text_area :description_items %>
+
+  <div class="mb-4" data-type-order-target="descriptionInput">
+    <%= form.label :description_items, 'Descrição dos itens', class: "block text-sm font-medium text-neutral-700 mb-1" %>
+    <%= form.text_field :description_items, placeholder: "2 pacotes, 1 caixa...", class: "w-full border border-neutral-200 rounded px-3 py-2" %>
   </div>
 
-  <div>
-    <%= form.label :request_time, style: "display: block" %>
-    <%= form.datetime_field :request_time %>
-  </div>
-
-  <div>
-    <%= form.label :accept_time, style: "display: block" %>
-    <%= form.datetime_field :accept_time %>
-  </div>
-
-  <div>
-    <%= form.label :finished_time, style: "display: block" %>
-    <%= form.datetime_field :finished_time %>
-  </div>
-
-  <div>
-    <%= form.label :order_value, style: "display: block" %>
-    <%= form.text_field :order_value %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mt-6">
+    <%= form.submit "Publicar pedido", class: "bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold transition" %>
   </div>
 <% end %>
+
+
+
+
+
+
