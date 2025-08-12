@@ -1,0 +1,52 @@
+<div class="w-full mx-auto bg-white rounded-xl shadow p-6">
+  <div class="flex justify-between items-center mb-2">
+    <div>
+      <h2 class="font-bold text-lg">Novo pedido</h2>
+      <span class="text-neutral-500 text-sm">Crie uma corrida ou entrega</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-neutral-700 text-sm">Papel:</span>
+      <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Cliente</span>
+    </div>
+  </div>
+
+  <form data-controller="tipo">
+    <input type="hidden" name="tipo" id="tipo-input" value="corrida" data-tipo-target="typeInput">
+    <div class="flex gap-4 mb-4">
+      <button type="button" data-tipo-target="rideBtn" data-action="click->tipo#selectRide" class="flex items-center gap-2 px-4 py-2 rounded bg-primary-base text-white font-semibold focus:outline-none">
+        <%= inline_svg_tag 'svg/car.svg', class: 'w-4 h-4 inline' %>
+        Corrida
+      </button>
+      <button type="button" data-tipo-target="deliveryBtn" data-action="click->tipo#selectDelivery" class="flex items-center gap-2 px-4 py-2 rounded border border-neutral-300 bg-neutral-base text-neutral-700 font-semibold focus:outline-none">
+        <%= inline_svg_tag 'svg/package.svg', class: 'w-4 h-4 inline' %>
+        Entrega
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1">Origem</label>
+        <input type="text" class="w-full border border-neutral-200 rounded px-3 py-2" placeholder="Endereço de partida/retirada">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1">Destino</label>
+        <input type="text" class="w-full border border-neutral-200 rounded px-3 py-2" placeholder="Endereço de chegada/entrega">
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1">Descrição items</label>
+  <input type="text" data-tipo-target="descriptionInput" class="w-full border border-neutral-200 rounded px-3 py-2" placeholder="Descrição (opcional caso corrida)">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1">Preço sugerido (R$)</label>
+        <input type="text" class="w-full border border-neutral-200 rounded px-3 py-2" placeholder="Preço sugerido (R$)">
+      </div>
+    </div>
+
+    <button type="submit" class="bg-neutral-400 text-white px-6 py-2 rounded font-semibold mt-2 cursor-not-allowed">
+      Publicar pedido
+    </button>
+  </form>
+</div> 

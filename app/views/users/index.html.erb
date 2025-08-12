@@ -1,28 +1,23 @@
-<p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Users" %>
-
-
-<div class="card flex justify-center bg-neutral-lighter w-full shadow-md rounded-3xl">
-  <div class="mx-auto">
-      <h1>Users</h1>
-  <div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New user", new_user_path %>
-<form action="<%= destroy_user_session_path %>" method="post" style="display:inline">
-  <input type="hidden" name="_method" value="delete">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <button type="submit">Sair</button>
-</form>
+<div class="w-full rounded-xl overflow-hidden mb-4" data-controller="orders-toggle">
+  <div class="w-full bg-neutral-base flex justify-center items-center p-1 mb-4 rounded-2xl">
+    <button class="w-1/2 rounded-2xl py-2 bg-neutral-lighter"
+    data-orders-toggle-target="buttonCreateOrder" data-action="click->orders-toggle#showNewOrder">
+      <%= inline_svg_tag 'svg/check.svg', class: 'w-4 h-4 inline' %>
+      <span>Criar pedido</span>
+    </button>
+    <button class="w-1/2 rounded-2xl py-2" data-orders-toggle-target="buttonListOrders" data-action="click->orders-toggle#showOrders">
+      <%= inline_svg_tag 'svg/package.svg', class: 'w-4 h-4 inline' %>
+      <span>Listar pedidos</span>
+    </button>
   </div>
-
+  <div data-orders-toggle-target="newOrder">
+    <%= render 'orders/new' %>
+  </div>
+  <div data-orders-toggle-target="orders" class="hidden">
+    <div id="orders">
+      oi
+    </div>
+  </div>
 </div>
-
 

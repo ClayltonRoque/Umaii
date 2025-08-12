@@ -26,12 +26,12 @@
     <% unless controller_name == 'sessions' && action_name == 'new' %>
       <%= render 'shared/navbar' %>
     <% end %>
-    <main class="  bg-gradient-to-b from-primary-lighter to-neutral-lighter mt-16">
-      <div class="container mx-auto py-6 flex">
-
-      <%= yield %>
-      </div>
-    </main>
+<main class="bg-gradient-to-b from-primary-lighter to-neutral-lighter min-h-[calc(100vh-4rem)] mt-16">
+  <div class="container mx-auto py-6 flex">
+    <%= yield %>
+  </div>
+</main>
+    
   </body>
 </html>
 
