@@ -3,6 +3,11 @@
      <h2 class="text-3xl font-bold mb-2 text-center">Entrar no Umaii</h2>
     <p class="mb-6 text-center text-gray-500">Faça login para acessar sua conta</p>
 
+    <% if flash[:alert] %>
+      <div class="devise-error mb-4 text-red-600 bg-red-50 border border-red-200 rounded p-3 text-center">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="mb-4">
      <%= f.label :login, 'E-mail ou nome', class: 'block text-sm font-medium text-gray-700' %>
