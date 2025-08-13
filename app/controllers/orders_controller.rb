@@ -3,14 +3,13 @@ class OrdersController < ApplicationController
 
   # PATCH /orders/:id/finish
   def finish
-    if current_user&.user_type == "motorista" && @order.driver_id == current_user.id
+    if current_user&.user_type == "motorista" && @order.driver_id.present? && @order.driver_id == current_user.id
       @order.update(order_status: "finalizado", finished_time: Time.current)
       redirect_to user_orders_path(@order.user), notice: "Pedido finalizado com sucesso."
     else
       redirect_to user_orders_path(@order.user), alert: "Você não tem permissão para finalizar este pedido."
     end
   end
-  before_action :set_order, only: %i[ show edit update destroy accept ]
 
   # PATCH /orders/:id/accept
   def accept

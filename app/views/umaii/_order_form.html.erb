@@ -1,8 +1,8 @@
 <div class="w-full mx-auto bg-white rounded-xl shadow p-6" data-controller="type-order">
   <div class="flex justify-between items-center mb-2">
     <div>
-      <h2 class="font-bold text-lg">Novo pedido</h2>
-      <span class="text-neutral-500 text-sm">Crie uma corrida ou entrega</span>
+      <h2 class="font-bold text-2xl">Novo pedido</h2>
+      <span class="text-neutral-500 text-base">Crie uma corrida ou entrega</span>
     </div>
     <div class="flex items-center gap-2">
       <span class="text-neutral-700 text-sm">Papel:</span>
@@ -51,7 +51,7 @@
   <div class="grid grid-cols-2 gap-4 mb-4">
     <div>
       <%= form.label :order_status, 'Status do pedido', class: "block text-sm font-medium text-neutral-700 mb-1" %>
-      <%= form.text_field :order_status, placeholder: " Pendente", class: "w-full border border-neutral-200 rounded px-3 py-2" %>
+      <%= form.text_field :order_status, value: "pending", placeholder: "Pendente", class: "w-full border border-neutral-200 rounded px-3 py-2 cursor-not-allowed", disabled: true %>
     </div>
     <div>
       <%= form.label :order_value, 'Valor do pedido', class: "block text-sm font-medium text-neutral-700 mb-1" %>

@@ -25,5 +25,7 @@ class UmaiiController < ApplicationController
     respond_to do |format|
       format.html
     end
+
+    @orders = @orders.page(params[:page]).per(16)
   end
 end
