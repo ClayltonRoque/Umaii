@@ -88,11 +88,13 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host: dpg-d2edh12dbo4c738alns0-a
+    url: <%= ENV['DATABASE_URL'] %>
+    host: dpg-d2edh12dbo4c738alns0-a.oregon-postgres.render.com
     port: 5432
     database: umaii
     username: umaii
     password: Rm6X7BjhA5GFGZGcwfh5wI2V1huhGH80
+    sslmode: require
   cache:
     <<: *primary_production
     database: umaii_production_cache

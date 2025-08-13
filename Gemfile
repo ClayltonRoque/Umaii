@@ -77,3 +77,4 @@ gem "tailwindcss-rails", "~> 4.3"
 gem "inline_svg"
 
 gem "rails_12factor", group: :production
+gem "dotenv-rails", groups: [ :development, :test, :production ]
