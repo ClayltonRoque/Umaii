@@ -60,6 +60,7 @@ group :development do
   gem "web-console"
   # Live reload automático no desenvolvimento
   gem "guard-livereload", require: false
+  gem "rspec-rails"
 end
 
 group :test do
