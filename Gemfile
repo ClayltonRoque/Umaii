@@ -42,6 +42,7 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "devise"
 gem "devise-jwt"
+gem "devise-i18n"
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
@@ -74,3 +75,6 @@ gem "tailwindcss-ruby", "~> 4.1"
 gem "tailwindcss-rails", "~> 4.3"
 
 gem "inline_svg"
+
+gem "rails_12factor", group: :production
+gem "dotenv-rails", groups: [ :development, :test, :production ]
