@@ -2,6 +2,11 @@ class UmaiiController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if current_user&.user_type == "motorista"
+      redirect_to orders_path, alert: "Motoristas não podem acessar a home."
+      return
+    end
+
     @orders = current_user.orders.includes(:driver).order(created_at: :desc)
 
     if params[:type_order].present?
@@ -19,7 +24,6 @@ class UmaiiController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream { render partial: "umaii/order_list", locals: { orders: @orders } }
     end
   end
 end

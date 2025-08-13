@@ -2,39 +2,72 @@
     <div class="w-full">
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Pedidos</h1>
-            <%= link_to 'Novo Pedido', new_order_path, class: 'px-5 py-2 bg-green-600 text-white rounded font-semibold shadow hover:bg-green-700 transition' %>
+                <% if current_user && !(params[:user_id].to_i == current_user.id) %>
+                    <%= link_to 'Meus Pedidos', user_orders_path(current_user), class: 'px-5 py-2 bg-blue-600 text-white rounded font-semibold shadow hover:bg-blue-700 transition' %>
+                <% end %>
+                <% if current_user&.user_type == "motorista" && params[:user_id].to_i == current_user.id %>
+                    <%= link_to 'Voltar para Pedidos', orders_path, class: 'ml-4 px-5 py-2 bg-gray-600 text-white rounded font-semibold shadow hover:bg-gray-700 transition' %>
+                <% end %>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <% @orders.each do |order| %>
-                        <div class="bg-white rounded-xl shadow p-6 flex flex-col gap-2 border border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs text-gray-400">#<%= order.id %></span>
-                                <span class="px-2 py-1 rounded text-xs font-semibold <%= order.order_status == 'finalizado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
-                                    <%= order.order_status || '-' %>
-                                </span>
-                            </div>
-                            <div class="mt-2 flex flex-col gap-1">
-                                <div>
-                                    <span class="text-gray-700 font-medium">Tipo:</span>
-                                    <span class="text-gray-900"><%= order.type_order || '-' %></span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-700 font-medium">Cliente:</span>
-                                    <span class="text-gray-900"><%= order.user&.name || '-' %></span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-700 font-medium">Motorista:</span>
-                                    <span class="text-gray-900"><%= order.driver&.name || '-' %></span>
-                                </div>
-                            </div>
-                            <div class="flex justify-end mt-4">
-                                <%= link_to 'Ver detalhes', order_path(order), class: 'px-4 py-1 bg-primary-base text-white rounded hover:bg-primary-dark transition text-sm font-semibold' %>
-                            </div>
-                        </div>
+            <div
+                class="bg-white rounded-xl shadow p-6 flex flex-col gap-2 border border-gray-100"
+            >
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-400">#<%= order.id %></span>
+                        <% status_class = case order.order_status
+                            when 'finalizado'
+                                'bg-green-100 text-green-700'
+                            when 'accepted'
+                                'bg-blue-100 text-blue-700'
+                            else
+                                'bg-yellow-100 text-yellow-700'
+                        end %>
+                    <span
+                        class="px-2 py-1 rounded text-xs font-semibold <%= status_class %>"
+                    >
+                        <%= order.order_status || '-' %>
+                    </span>
+                </div>
+                <div class="mt-2 flex flex-col gap-1">
+                    <div>
+                        <span class="text-gray-700 font-medium">Tipo:</span>
+                        <span class="text-gray-900"
+                            ><%= order.type_order || '-' %></span
+                        >
+                    </div>
+                    <div>
+                        <span class="text-gray-700 font-medium">Cliente:</span>
+                        <span class="text-gray-900"
+                            ><%= order.user&.name || '-' %></span
+                        >
+                    </div>
+                    <div>
+                        <span class="text-gray-700 font-medium"
+                            >Motorista:</span
+                        >
+                        <span class="text-gray-900"
+                            ><%= order.driver&.name || '-' %></span
+                        >
+                    </div>
+                </div>
+                <div class="flex justify-end mt-4 gap-2">
+                    <%= link_to 'Ver detalhes', order_path(order), class: 'px-4 py-1 bg-primary-base text-white rounded hover:bg-primary-dark transition text-sm font-semibold' %>
+                    <% if current_user&.user_type == "motorista" && order.driver.nil? && order.order_status != 'accepted' %>
+                        <%= button_to 'Aceitar pedido', accept_order_path(order), method: :patch, class: 'px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm font-semibold', data: { confirm: 'Tem certeza que deseja aceitar este pedido?' } %>
+                    <% end %>
+                    <% if current_user&.user_type == "motorista" && order.driver_id == current_user.id && order.order_status != 'finalizado' %>
+                        <%= button_to 'Finalizar pedido', finish_order_path(order), method: :patch, class: 'px-4 py-1 bg-gray-800 text-white rounded hover:bg-gray-900 transition text-sm font-semibold', data: { confirm: 'Tem certeza que deseja finalizar este pedido?' } %>
+                    <% end %>
+                </div>
+            </div>
             <% end %>
         </div>
         <% if @orders.empty? %>
-            <div class="text-center text-gray-400 mt-12">Nenhum pedido encontrado.</div>
+        <div class="text-center text-gray-400 mt-12">
+            Nenhum pedido encontrado.
+        </div>
         <% end %>
     </div>
 </div>

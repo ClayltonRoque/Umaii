@@ -1,10 +1,41 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[ show edit update destroy accept finish ]
+
+  # PATCH /orders/:id/finish
+  def finish
+    if current_user&.user_type == "motorista" && @order.driver_id == current_user.id
+      @order.update(order_status: "finalizado", finished_time: Time.current)
+      redirect_to user_orders_path(@order.user), notice: "Pedido finalizado com sucesso."
+    else
+      redirect_to user_orders_path(@order.user), alert: "Você não tem permissão para finalizar este pedido."
+    end
+  end
+  before_action :set_order, only: %i[ show edit update destroy accept ]
+
+  # PATCH /orders/:id/accept
+  def accept
+    if @order.driver_id.nil?
+      @order.update(driver_id: current_user.id, order_status: "accepted", accept_time: Time.current)
+      redirect_to orders_path, notice: "Pedido aceito com sucesso'."
+    else
+      redirect_to orders_path, alert: "Este pedido já foi aceito por outro motorista."
+    end
+  end
 
   # GET /orders or /orders.json
   def index
+     if current_user&.user_type == "cliente"
+        redirect_to root_path, alert: "Clientes não podem acessar a home."
+      return
+     end
     if params[:user_id]
-      @orders = Order.where(user_id: params[:user_id])
+      if current_user&.user_type == "motorista" && params[:user_id].to_i == current_user.id
+        @orders = Order.where(driver_id: current_user.id)
+
+        @orders = @orders.where(order_status: [ "accepted", "finalizado" ])
+      else
+        @orders = Order.where(user_id: params[:user_id])
+      end
       # Filtro por descrição
       if params[:description_items].present?
         @orders = @orders.where("description_items ILIKE ?", "%#{params[:description_items]}%")
@@ -78,7 +109,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params.expect(:id))
+      @order = Order.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
