@@ -88,9 +88,11 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: umaii_production
+    host: dpg-d2edh12dbo4c738alns0-a
+    port: 5432
+    database: umaii
     username: umaii
-    password: <%= ENV["UMAII_DATABASE_PASSWORD"] %>
+    password: Rm6X7BjhA5GFGZGcwfh5wI2V1huhGH80
   cache:
     <<: *primary_production
     database: umaii_production_cache
