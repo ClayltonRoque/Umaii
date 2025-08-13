@@ -24,28 +24,24 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-     if current_user&.user_type == "cliente"
-        redirect_to root_path, alert: "Clientes não podem acessar a home."
+    if current_user&.user_type == "cliente"
+      redirect_to root_path, alert: "Clientes não podem acessar a home."
       return
-     end
+    end
     if params[:user_id]
       if current_user&.user_type == "motorista" && params[:user_id].to_i == current_user.id
         @orders = Order.where(driver_id: current_user.id)
-
         @orders = @orders.where(order_status: [ "accepted", "finalizado" ])
       else
         @orders = Order.where(user_id: params[:user_id])
       end
-      # Filtro por descrição
       if params[:description_items].present?
         @orders = @orders.where("description_items ILIKE ?", "%#{params[:description_items]}%")
       end
-      # Ordenação por valor
       if params[:order_value_sort].present?
         direction = params[:order_value_sort] == "desc" ? :desc : :asc
         @orders = @orders.order(order_value: direction)
       end
-      # Ordenação por data
       if params[:date_sort].present?
         direction = params[:date_sort] == "desc" ? :desc : :asc
         @orders = @orders.order(request_time: direction)
@@ -53,6 +49,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.all
     end
+    @orders = @orders.page(params[:page]).per(8)
   end
 
   # GET /orders/1 or /orders/1.json
